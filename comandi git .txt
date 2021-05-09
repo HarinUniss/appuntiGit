@@ -1,0 +1,201 @@
+CONFIGURAZIONE GLOBALE GIT 
+	git config --global user.name "il tuo nome"
+	git config --global user.email "la tua email"
+
+
+		--global specifica di usare la stessa configurazione su tutto il compiuter 
+		--local tengo la configurazione solo per il progeto in questione
+
+IMPOSTARE L'EDITOR DI TESTO CHE VOGLIO UTILIZZARE (esempio impostato per vim)
+	git config --global core.editor 'vim'
+
+
+- - - - - -  - -- - -- - - - -- - - - -- - - -- -- - - - -- - - - -- - - - -- - - - -- - - - -- - - - - -- - - -
+
+INIZIALIZZARE UN PROGETTO SU GIT BASH
+	posizionarsi nella cartella e digitare il seguante comando 
+	
+	git init
+
+	verrà creata una cartella nascosta nominata .git
+
+SEGNALARE A GIT DI NON TRACCIARE ALCUNI FILE CHE NON CI SERVONO 
+	si deve creare un file chiamato .gitgnore 
+	bisogna SEMPRE ADDARE IL FILE .gitgnore
+
+	#questo è un commento 
+
+	#se voglio non tracciare un file specifico 
+	nomeFile.estensione
+	#se non voglio tracciare una cartella
+	percorsoCartella/
+	#se non voglio tutti i file di una certa estensione 
+	*.out
+	*.txt
+
+
+VERIFICARE FILE E CARTELLE INTERNE AL PROGETTO 
+	git status 	//segnerà in rosso i file che non sono traciati che non sono ancora stati aggiunti al progetto in verde gli altri 
+
+AGGIUNGERE UN FILE DENTRO ALLO STAGE 
+	git add nomeFile.estensione
+	
+	quando abbiamo molti file da addare ma vogliamo scegliere cosa addare
+		git add -p		//permetterà di vedere lentamente tutte le modifiche e confermare o annullarle passo passo o confermare tutto in una volta
+
+
+ARCHIVIO LE MODIFICHE PRESENTI NELLO STAGE DENTRO AL REPOSITORY 
+	git commit -m “Commento che servirà per sapere cosa ho fatto in un determinato nodo(commit)”
+
+RIMUOVERE UN FILE 
+	git rm nomeFile 		//ricordarsi di fare anche il commit di questa operazione
+
+
+RIMETTERE NELLO STAGE I DATI DELL'ULTIMO COMMIT  
+	git reset HEAD nomeFile.txt
+	preleva i dati dal REPOSYTORI e li sostituira con quelli delo STAGE
+
+RIMETTERE NELLA WORKING DIRECTORY I FILE PRESENTI NELLO STAGE 
+	git checkout --nomeFile
+
+
+VERIFICARE LE OPERAZIONI SVOLTE E VERSIONI GENERATE QUANDO E DA CHI	VISUALIZZARE I VARI COMMIT
+
+	git log
+
+
+TORNARE AD UN COMMIT PRECENEDNTE
+	git log  	//visualizzo quanti commit sono stati fatti e da chi 
+	git checkout (primi caratteri del codice commit che voglio) -- nomeFileDaCommittare.txt
+
+
+
+VISUALIZZARE DIFFERENZE TRA UN FILE PRESENTE NEL REPOSITORY E
+	git diff	 //differenze tra la mia cartella e la STAGE area 
+
+	git diff --cached 	//Differenza tra la STAGE AREA e il mio ultimo commit
+
+	git diff commit1 commit2	//Differenza tra 2 commit
+
+
+PUNTATORE HEAD 
+	puntatore all'ultimo commit che è stato fato 
+
+- - - - - -  - -- - -- - - - -- - - - -- - - -- -- - - - -- - - - -- - - - -- - - - -- - - - -- - - - - -- - - -
+SAPERE QUANTI BRANCH SONO PRESENTI NEL PROGETTO
+	git branch  
+
+CREARE UN BRANCH 	
+	git branch nomeBranch		//viene inizzializzato un altro puntatore a HEAD
+
+PASSARE DA UN BRANCH AD UN ALTRO 
+	git checkout nomeBranch
+
+CREARE UN NUOVO BRANCH E PASSARE DIRETTAMENTE SU DI LUI AUTOMATICAMENTE
+	git branch -b nomeBranch
+
+FONDERE ASSIEME DUE BRANCH
+	git merge nomeBranchCheVoglioMettereSulBranchInCuiSono
+
+COPIARE IL RAMO SU CUI SONO SU GIT NEL DEPOSITO GITHUB
+		git branch -M main
+
+ELIMINARE UN BRANCH 
+		git branch -d nomeBranch
+
+- - - - - -  - -- - -- - - - -- - - - -- - - -- -- - - - -- - - - -- - - - -- - - - -- - - - -- - - - - -- - - -
+
+INDIRIZZA IL MIO DEPOSITO LOCALE VERSO UN ALTRO DEPOSITO REMOTO 
+
+	git remote add OC 	https://github.com/OpenClassrooms-Student-Center/ProjetOpenSource.git
+	
+
+
+	CLONARE UN PROGGETTO SUL PROPRIO GIT
+		Una volta utilizzato il comando precedente
+	
+		git clone 	https://github.com/OpenClassrooms-Student-Center/ProjetOpenSource.git
+
+
+
+		* l'asterisco indica in che ramo io mi trovi  
+	CREARER UNA RAMIFICAZIONE MASTER 
+		sufficente creare un file nella cartella inizzializzata e poi farne il "commit"
+
+	
+
+	
+	ACCEDERE ALLO STORICO 
+		git reflog 
+		stamperà tutte le azioni effettuate e il SHA codice che permette di tornare allo stato di quella operazione
+
+TRTASFERIRE FILE SU GhiHub
+
+		git push 
+
+IMPORTARE DEI FILE DA GitHub
+		git pull
+
+
+
+
+CREAZIONE DI UNA RIMESSA
+	git stash
+	Spazio dove stoccare i file non ancora commitati per utilizarli successivamente 
+
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+VERIFICARE I REPOSYTORI REMOTI COLLEGATI ALLA CARTELLA 
+	git remote 
+
+CREARE UN COLLEGAMENTO DI UNA CARTELLA CON UNA DI GIT HUB
+	git remote add projectC https://github.com/HarinUniss/projectC.git
+
+	NB projectC è il nome che andrà a sostituire l'indirizzo della pagina per non dover ogni volta riscrivere tutto l'indirizzo 
+
+TRASFERIRE I FILE NELLA CARTELLA REMOTA DI GIT HUB
+	git push -u projectC master
+
+	-u per caricare tutti i file contenuti nella cartella
+
+-----------------------------------------------------------------------------------------------------------------------
+
+	
+		      ___________________________________________________
+			WORKING DIRECTORY
+	  		copia di lavoro dove efettuo le modifiche 
+		      ___________________________________________________
+
+			  |				   ^
+		git add nomeFile			   |
+			  |				git checkout -- nomeFile 
+			  V				   |
+		      ___________________________________________________
+			STAGE 
+			chache dove salvo delle modifiche valide 
+			o richiamo dal REPOSYTORI i file non modificato
+		      ___________________________________________________
+
+			  |				   ^
+			git commit			   |
+			  |				 git reset -- nomeFile
+			  V				   |
+		      ___________________________________________________
+
+			REPOSYTORY 
+			Ultimi file che erano stati salvati 
+			in modo definitivo nel mio deposito locale
+		      ___________________________________________________
+
+			  |				   ^
+			git push			   |
+			  |				 git pull
+			  V				   |
+		      ___________________________________________________
+
+			GIT HUB
+			deposito distante 
+		      ___________________________________________________
+
+
+--------------------------------------------------------------------------------------------------------------------------------

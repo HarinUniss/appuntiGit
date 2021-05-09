@@ -1,0 +1,8 @@
+AGGIUNGERE UN REPOSITORY REMOTO 
+	git remote add nome url
+
+ELIMINARE REPOSYTORI 
+	git remote rm nome 
+
+RINOMINARE UN REPOSYTORY 
+	git remote rename vecchioNome nuovoNome
